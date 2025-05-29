@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta para Yeilin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+/*cuerpo de la pagina*/
+        body {
+            background: #ffeef0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+        /*cuerpo del sobre*/
+        .carta-container {
+            position: relative;
+            width: 700px;
+            max-width: 90%;
+            height: 500px;
+            background: #0662cc;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+/*triangulo que abre la carta*/
+        .solapa {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: #0a85d8;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            transition: transform 0.5s ease;
+            transform-origin: top;
+            z-index: 2;
+        }
+
+/*Cuerpo de la carta*/
+        .contenido-carta {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: #b65151;
+            padding: 20px;
+            overflow-y: auto;
+            transform: translateY(100%);
+            transition: transform 0.5s ease;
+            z-index: 1;
+        }
+/*corazon que abre la carta */
+        .corazon {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            background: #ff0000;
+            transform: translate(-50%, -50%) rotate(45deg);
+            cursor: pointer;
+            z-index: 3;
+        }
+
+/*estilos antes y despues del click*/
+        .corazon::before,
+        .corazon::after {
+            content: "";
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #fc0000;
+            border-radius: 50%;
+        }
+
+        .corazon::before {
+            top: -20px;
+            left: 0;
+        }
+
+        .corazon::after {
+            top: 0;
+            left: -20px;
+        }
+/*Escritos de la carta */
+        .texto {
+            color: #333;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+/*Titulo de la carta */
+        h1 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #e40b0b;
+            text-align: center;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .Franklin{
+text-align: right;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="carta-container">
+        <div class="solapa" id="solapa"></div>
+        <div class="corazon" id="corazon"></div>
+        <div class="contenido-carta" id="contenido">
+            <h1> Todo Lo que Siento</h1>
+            <div class="texto">
+                <br>Querida Yeilin💗
+                <p>Me haz hecho hacer cosas que nunca las había hecho y esta es una de ellas, pues esta carta la hago con el motivo de decirte todo acerca de nosotros, este año y varios meses y una de las formas de las que me despediré de ti.</p>
+                <p>La inició pidiendo perdón, perdón por todo lo malo que te he hecho, por las mentiras que he dicho, por la desconfianza que cause en ti, te di tantos motivos para alejarte, para despreciarme, para verme distinto y aun así no lo hiciste, te quedaste, cada vez decidiste confiar una vez más en mí, creer en mí y creo que no he valorado eso.</p>
+                <br><strong><p>¿Qué eres para mí?</strong> <br><br>Eres una persona maravillosa, increíble, noble, cariñosa, me encanta cómo eres conmigo, en la manera en que te preocupas hasta cuando ni yo mismo lo hago por mí, las cosas que me hiciste ver que están mal en mí en vez de dejarlo así e irte. Me encanta tu forma de ser, de hablar, cómo me miras, cómo me hablas, me encanta el tiempo que pasamos juntos.</p>
+                <p>Para mí significará siempre algo hermoso. Para mí eres esa lucecita que me ilumina, esa luna que brilla en la oscuridad. Dentro de tantas fallas que tengo tú me hiciste ver muchas de ellas y por ti a día de hoy las intento cambiar. Ser mejor, ser alguien bueno primordialmente contigo.</p>
+                <p>Te quiero tanto, y me haz hecho sentir tanto como nunca lo había hecho. Estoy dispuesto a hacer lo que sea por ti. Te extraño después de verte. Mis días más felices son cuando voy a verte. Antes no tenía nada planeado contigo, pero ahora no me imagino una vida sin ti.</p>
+                <p>No sé qué vaya a ser de nosotros. Lo único que sé es que yo sí estoy dispuesto a tomar ese proceso, a intentarlo porque no quiero renunciar a ti.</p>
+                <p>Te quiero mucho Yeilin Lachapel, te deseo lo mejor allá, que tengas una buena vida, que seas feliz junto a tu padre, que cumplas todas tus metas. Que prosperes, que te conviertas en lo que tanto anhelas y espero que tengas la vida que deseas. Si estoy en tu vida te apoyaré y estaré siempre para ti. Y si por cosas de la vida no lo estoy y todo acaba, estará tu nombre en cada una de mis oraciones.</p>
+                <strong><p>Te quiero mucho mi Yeii.💗</strong></p>
+
+                <strong><p class="Franklin">Con Amor    Tu Roe💗</p></strong>
+            </div>
+        </div>
+    </div>
+    <script>
+        const solapa = document.getElementById('solapa');
+        const contenido = document.getElementById('contenido');
+        const corazon = document.getElementById('corazon');
+        let estado = 0;
+
+        corazon.addEventListener('click', () => {
+            if (estado === 0) {
+                solapa.style.transform = 'rotateX(-180deg)';
+                estado = 1;
+            } else if (estado === 1) {
+                contenido.style.transform = 'translateY(0)';
+                estado = 2;
+            } else {
+                contenido.style.transform = 'translateY(100%)';
+                solapa.style.transform = 'rotateX(0deg)';
+                estado = 0;
+            }
+        });
+    </script>
+</body>
+</html>
